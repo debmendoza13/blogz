@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1><center> {{name}} </center></h1>
+<p> {{body}} </p>
+<em> {{pubdate.strftime(("Date Published: %A, %B, %d, %Y"))}} <br>
+{{pubdate.strftime(("Time Published: %I:%M %p %Z"))}}</em><br>
+
+{% endblock %}

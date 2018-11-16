@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> {{title}} </title>
+        <style type="text/css">
+            .error {
+                color: red;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
+    </head>
+    <body>
+        <nav>
+            <a href="/blog"> Main Blog Page </a> |
+            <a href="/newpost"> Add a Blog Entry </a>
+        </nav>
+
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>

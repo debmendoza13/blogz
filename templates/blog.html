@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1><center> Build a Blog </center></h1>
+
+{% if listings|length == 0 %}
+<p> No entries found </p>
+{% else %}
+    <ul>
+        {% for listing in listings %}
+        <li><h2><a href="/blog?id={{listing.id}}"> {{listing.title}} </a></h2>
+            <p> {{listing.body}} </p>
+            <em> {{listing.pub_date.strftime(("Date Published: %A, %B, %d, %Y"))}} <br>
+            {{listing.pub_date.strftime(("Time Published: %I:%M %p %Z"))}} </em>
+            <br>
+            <br>
+        </li>
+        {% endfor %}
+        </ul>
+
+    {% endif %}
+{% endblock %}
