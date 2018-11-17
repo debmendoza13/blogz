@@ -21,7 +21,7 @@ class Blog(db.Model):
         self.title = title
         self.body = body
 
-@app.route("/blog", methods=['GET'])
+@app.route("/blog", methods=['GET', 'POST'])
 def index():
     id = request.args.get("id")
 
