@@ -43,7 +43,7 @@ def postform():
         title_error = "Please enter a title"
     if body == "":
         body_error = "Please enter a post"
-
+    
     if not title_error and not body_error:
         new_listing = Blog(name, body)
         db.session.add(new_listing)
