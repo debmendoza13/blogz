@@ -39,31 +39,6 @@ def require_login():
     if request.endpoint not in allowed_routes and 'username' not in session:
         return render_template("login.html")
 
-#fxn from build-a-blog
-@app.route("/blog", methods=['GET', 'POST'])
-def blog():
-
-    id = request.args.get("id")
-    user_id = request.args.get("user")
-
-    if not id and not user_id:
-        listings = Blog.query.order_by(Blog.id.desc()).all()
-        
-        return render_template("blog.html", title="Blogz", listings=listings)
-    
-    if not user_id:
-        listing = Blog.query.filter_by(id=id).first()
-        owner_id = listing.owner_id
-        name = listing.title
-        body = listing.body
-        username = listing.owner.username
-        return render_template("display_entry.html", name=name, body=body, username=username, owner_id=owner_id, listing=listing)
-    else:
-        owner = User.query.filter_by(id=user_id).first()
-        listings = Blog.query.filter_by(owner=owner).order_by(Blog.id.desc()).all()
-        
-        return render_template("blog.html", title=owner.username, listings=listings, user=user_id)
-
 #fxn from user-signup
 @app.route("/login", methods=['POST', 'GET'])
 def login():
@@ -86,7 +61,7 @@ def login():
             pw_error = "Password is incorrect"
              
     return render_template("login.html", name_error=name_error, pw_error=pw_error)
-     
+
 #fxn from get-it-done/ user-signup
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
@@ -141,6 +116,31 @@ def signup():
             return redirect('/newpost')
 
     return render_template("signup.html", name_error=name_error, pw_error=pw_error, ver_pw_error=ver_pw_error, username=username)
+
+#fxn from build-a-blog
+@app.route("/blog", methods=['GET', 'POST'])
+def blog():
+
+    id = request.args.get("id")
+    user_id = request.args.get("user")
+
+    if not id and not user_id:
+        listings = Blog.query.order_by(Blog.id.desc()).all()
+        
+        return render_template("blog.html", title="Blogz", listings=listings)
+    
+    if not user_id:
+        listing = Blog.query.filter_by(id=id).first()
+        owner_id = listing.owner_id
+        name = listing.title
+        body = listing.body
+        username = listing.owner.username
+        return render_template("display_entry.html", name=name, body=body, username=username, owner_id=owner_id, listing=listing)
+    else:
+        owner = User.query.filter_by(id=user_id).first()
+        listings = Blog.query.filter_by(owner=owner).order_by(Blog.id.desc()).all()
+        
+        return render_template("blog.html", title=owner.username, listings=listings, user=user_id)
 
 #fxn from get-it-done
 @app.route("/logout", methods=["POST"])
