@@ -35,9 +35,9 @@ class User(db.Model):
 #fxn from get-it-done
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'signup', 'blog', 'index']
+    allowed_routes = ['login', 'signup']
     if request.endpoint not in allowed_routes and 'username' not in session:
-        return render_template("login.html")
+        return redirect('/login', '/signup')
 
 #fxn from user-signup
 @app.route("/login", methods=['POST', 'GET'])
@@ -143,10 +143,10 @@ def blog():
         return render_template("blog.html", title=owner.username, listings=listings, user=user_id)
 
 #fxn from get-it-done
-@app.route("/logout", methods=["POST"])
+@app.route("/logout")
 def logout():
     del session['username']
-    return render_template("index.html")
+    return redirect('/index')
 
 #fxn from build-a-blog
 @app.route("/newpost", methods=["POST"])
@@ -159,6 +159,9 @@ def postform():
 
     title_error = ""
     body_error = ""
+
+    if not owner:
+        return redirect('/login')
 
     if name == "":
         title_error = "Please enter a title"
