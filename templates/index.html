@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<!-- Will list all users and all blog posts by users -->
+
+    <h1><center>Bloggers</center></h1>
+    {% if user_list|length == 0 %}
+    <p>No users yet</p>
+    {% else %}
+    <ul>
+        {% for user in user_list %}
+        <li><h2><a href="/blog?user={{user.id}}">{{user.username}}</a></h2></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endblock %}

@@ -1,9 +1,13 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1><center> {{name}} </center></h1>
-<p> {{body}} </p>
 
-<br><br>
+<!-- Displays single blog post -->
+
+<h1><center> {{name}} </center></h1>
+<p><center> {{body}} </center></p>
+
+<br>
+<center><em>Written by: <a href="/blog?user={{listing.owner_id}}">{{listing.owner.username}}</a></em></center>
+<br>
 
 {% endblock %}

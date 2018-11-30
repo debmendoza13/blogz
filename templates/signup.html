@@ -1,0 +1,41 @@
+{% extends "base.html" %} 
+{% block content %}
+
+<head>
+<style>
+    .error {
+      color: red;
+    }
+</style>
+<title> Member Signup</title>
+</head>
+<body><center>
+<h1> Member Signup </h1>
+<form action="/signup" method="post">
+  <table>
+    <tr>
+      <td><label for="username"> Username </label></td>
+      <td><input placeholder="Enter username up to 20 chars" style="width: 200px; height: 20px" name="username" type="text" value="{{username}}" />
+        
+        {% if name_error|length != 0%}
+          <span class="error"> {{name_error}} </span></td></tr>
+        {% endif %}
+    
+    <tr>
+      <td><label for="password"> Password </label></td>
+          <td><input placeholder="Enter password up to 20 chars" style="width: 200px; height: 20px" name="password" type="password" />
+          
+      {% if pw_error|length != 0%}
+              <span class="error"> {{pw_error}} </span></td></tr>
+      {% endif %}
+    
+    <tr>
+      <td><label for="verify"> Verify Password </label></td>
+          <td><input placeholder="Re-enter password" style="width: 200px; height: 20px" name="verify" type="password" />
+              <span class="error"> {{ver_pw_error}} </span></td></tr>
+   
+  </table>
+<input type="submit" value="Sign up!" /></center>
+</form>
+
+{% endblock %}

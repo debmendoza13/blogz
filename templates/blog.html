@@ -1,6 +1,9 @@
 {% extends "base.html" %} 
 {% block content %}
-<h1><center> Build a Blog </center></h1>
+
+<!-- This displays all posts  -->
+
+<h1><center> {{title}} </h1></center>
 
 {% if listings|length == 0 %}
 <p> No entries found </p>
@@ -9,7 +12,7 @@
         {% for listing in listings %}
         <li><h2><a href="/blog?id={{listing.id}}"> {{listing.title}} </a></h2>
             <p> {{listing.body}} </p>
-            <br>
+            <em>Written by: <a href="/blog?user={{listing.owner_id}}">{{listing.owner.username}}</a></em>
             <br>
         </li>
         {% endfor %}
