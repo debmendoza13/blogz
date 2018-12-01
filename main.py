@@ -35,9 +35,9 @@ class User(db.Model):
 #fxn from get-it-done
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'signup']
+    allowed_routes = ['login', 'signup', 'blog', 'index']
     if request.endpoint not in allowed_routes and 'username' not in session:
-        return redirect('/login', '/signup')
+        return redirect('/login')
 
 #fxn from user-signup
 @app.route("/login", methods=['POST', 'GET'])
@@ -159,9 +159,6 @@ def postform():
 
     title_error = ""
     body_error = ""
-
-    if not owner:
-        return redirect('/login')
 
     if name == "":
         title_error = "Please enter a title"
